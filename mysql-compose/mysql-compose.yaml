@@ -1,0 +1,22 @@
+version: '3'
+services:
+    mysql:
+        restart: always
+        image: mysql:8
+        container_name: mysqlService
+        security_opt:
+            - seccomp:unconfined
+        volumes:
+            - "/opt/dockerData/mysqlData/data:/var/lib/mysql"
+            - "/opt/dockerData/mysqlData/conf:/etc/mysql/conf.d"
+            - "/opt/dockerData/mysqlData/logs:/logs"
+        environment:
+            MYSQL_ROOT_PASSWORD: sq11005my
+            MYSQL_USER: 'user'
+            MYSQL_PASS: 'user@1005'
+        ports:
+            - 13306:3306
+        command:
+            --default-authentication-plugin=mysql_native_password
+            --character-set-server=utf8mb4
+            --collation-server=utf8mb4_general_ci
