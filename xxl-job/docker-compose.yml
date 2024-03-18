@@ -1,0 +1,17 @@
+version: "3"
+services:
+  xxl-job-admin:
+    restart: always
+    # docker 镜像
+    image: xuxueli/xxl-job-admin:2.3.0
+    # 容器名称
+    container_name: xxl-job-admin
+    volumes:
+      # 日志目录映射到主机目录
+      - /opt/docker/xxljob/data/logs:/data/applogs
+    ports:
+      # 端口映射
+      - "8090:8090"
+    environment:
+      # 设置启动参数
+      PARAMS: '--server.port=8090 --server.servlet.context-path=/ --spring.datasource.url=jdbc:mysql://192.168.1.4:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai --spring.datasource.username=xxl_job --spring.datasource.password=AgWDFPM8gKR8h5f8'

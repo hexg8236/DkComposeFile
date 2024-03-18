@@ -1,0 +1,24 @@
+version: '3'
+services:
+  rabbitmq:
+    # 镜像  这个版本可以到docker-hub去获取自己想要的版本
+    image: rabbitmq:3.9.13-management
+    # 容器名
+    container_name: rabbitmq
+    # 是否支持重启
+    restart: always
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    # 容器卷
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+      - .//rabbitmq/config/rabbitmq.sh:/etc/rabbitmq/rabbitmq.sh
+    # 环境配置
+    environment:
+      # 账号
+      RABBITMQ_DEFAULT_USER: admin 
+      # 密码 
+      RABBITMQ_DEFAULT_PASS: Aa123456
+      RABBITMQ_DEFAULT_VHOST: '/' 
